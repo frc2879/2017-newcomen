@@ -1,4 +1,4 @@
-# 2017-newcomen
+# 2017-newcomen [![Build Status](https://travis-ci.org/frc2879/2017-newcomen.svg?branch=master)](https://travis-ci.org/frc2879/2017-newcomen)
 FRC Team 2879 robot code for the 2017 Steamworks competition, code-named "Newcomen"
 
 To set up this module in your development environment, follow these steps:
