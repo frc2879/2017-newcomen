@@ -1,17 +1,19 @@
 package com.frc2879.newcomen.commands;
 
 import com.frc2879.newcomen.RobotModule;
-
 import edu.wpi.first.wpilibj.command.Command;
+
 
 /**
  */
 public class DriveMecanum extends Command{
-    public DriveMecanum() {
+    
+	public DriveMecanum(){
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         super("DriveMecanum");
         requires(RobotModule.drivetrain);
+       
     }
 
     // Called just before this Command runs the first time
