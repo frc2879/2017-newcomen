@@ -19,8 +19,6 @@ public class Drivetrain extends Subsystem {
     
     public RobotDrive robotDrive;
     
-    
-    
     public Drivetrain() {
         super("Drivetrain");
         SmartDashboard.putData(this);
@@ -53,9 +51,20 @@ public class Drivetrain extends Subsystem {
                 
         leftTalonR.setEncPosition(0);
         rightTalonR.setEncPosition(0);
+        leftTalonF.setEncPosition(0);
+        rightTalonF.setEncPosition(0);
+        
+        leftTalonR.enableBrakeMode(false);
+        rightTalonR.enableBrakeMode(false);
+        leftTalonF.enableBrakeMode(false);
+        rightTalonF.enableBrakeMode(false);
         
         leftTalonR.set(0);
         rightTalonR.set(0);
+        leftTalonF.set(0);
+        rightTalonF.set(0);
+        
+        robotDrive.setSafetyEnabled(false);
     }
 
     public void initDefaultCommand() {
