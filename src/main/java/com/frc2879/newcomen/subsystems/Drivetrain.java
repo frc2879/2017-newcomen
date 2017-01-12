@@ -1,11 +1,13 @@
 package com.frc2879.newcomen.subsystems;
 
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+=======
+>>>>>>> parent of 68826ea... adding talons
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import jaci.openrio.toast.lib.registry.Registrar;
 
 /**
  *
@@ -14,6 +16,7 @@ public class Drivetrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+<<<<<<< HEAD
     
     CANTalon leftTalonR, leftTalonF, rightTalonR, rightTalonF;
     
@@ -61,6 +64,18 @@ public class Drivetrain extends Subsystem {
         
         robotDrive.setSafetyEnabled(false);
     }
+=======
+
+
+    public Drivetrain() {
+        super("Drivetrain");
+        SmartDashboard.putData(this);
+
+
+    }
+
+
+>>>>>>> parent of 68826ea... adding talons
 
     public void initDefaultCommand() {
 
