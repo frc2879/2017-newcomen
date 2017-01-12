@@ -48,11 +48,6 @@ public class Drivetrain extends Subsystem {
         rightTalonR.reverseSensor(false);
         leftTalonF.reverseSensor(false);
         rightTalonF.reverseSensor(false);
-                
-        leftTalonR.setEncPosition(0);
-        rightTalonR.setEncPosition(0);
-        leftTalonF.setEncPosition(0);
-        rightTalonF.setEncPosition(0);
         
         leftTalonR.enableBrakeMode(false);
         rightTalonR.enableBrakeMode(false);
