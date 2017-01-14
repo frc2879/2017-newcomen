@@ -1,14 +1,14 @@
 package com.frc2879.newcomen;
 
-
-import com.frc2879.newcomen.commands.*;
-
+import com.frc2879.xboxcontroller.XboxController;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+	
+
+public class UI {
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -36,6 +36,14 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-		
+	private XboxController xboxController;
+	
+	public UI() {
+		xboxController = new XboxController(1);
+	}
+	
+	public XboxController getXboxController() {
+		return xboxController;
+	}
 }
 

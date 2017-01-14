@@ -1,6 +1,8 @@
 package com.frc2879.newcomen.commands;
 
 import com.frc2879.newcomen.RobotModule;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -22,8 +24,10 @@ public class DriveMecanum extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	 RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(RobotModule.ui.getXboxController().getX(Hand.kLeft),
+    			 														RobotModule.ui.getXboxController().getY(Hand.kLeft),
+    			 														RobotModule.ui.getXboxController().getTwist(), 0);
     }
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
