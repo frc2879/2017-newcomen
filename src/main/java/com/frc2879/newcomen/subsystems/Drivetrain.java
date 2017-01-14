@@ -48,5 +48,13 @@ public class Drivetrain extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    public void stop() {
+        robotDrive.stopMotor();
+    }
 
+	public  RobotDrive getRobotDrive() {
+		// TODO Auto-generated method stub
+		return robotDrive  ;
+	}
 }
+    

@@ -1,5 +1,7 @@
 package com.frc2879.newcomen;
 
+import com.frc2879.newcomen.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -7,7 +9,6 @@ import jaci.openrio.toast.core.ToastConfiguration;
 import jaci.openrio.toast.lib.log.Logger;
 import jaci.openrio.toast.lib.module.IterativeModule;
 import jaci.openrio.toast.lib.module.ModuleConfig;
-import com.frc2879.newcomen.subsystems.*;
 import jaci.openrio.toast.lib.state.RobotState;
 
 public class RobotModule extends IterativeModule {
@@ -34,6 +35,8 @@ public class RobotModule extends IterativeModule {
     public static ModuleConfig config;
 
     public static Drivetrain drivetrain;
+
+    public static UI ui;
 
     Command autonomousCommand;
 
