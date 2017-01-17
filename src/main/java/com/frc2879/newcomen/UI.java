@@ -38,12 +38,25 @@ public class UI {
 	
 	private XboxController xboxController;
 	
+
 	public UI() {
-		xboxController = new XboxController(1);
+		xboxController = new XboxController(0);
+		xboxController.leftStick.setDeadZone(0.1);
+        xboxController.rightStick.setDeadZone(0.1);
 	}
 	
 	public XboxController getXboxController() {
 		return xboxController;
 	}
+	public double getdoublefromstickname(String name) {
+        switch (name.toLowerCase()) {
+            case "leftx" : return xboxController.leftStick.getX();
+            case "lefty" : return xboxController.leftStick.getY();
+            case "rightx" : return xboxController.rightStick.getX();
+            case "righty" : return xboxController.rightStick.getY();
+            default : return 0;
+        }
+    }
+
 }
 

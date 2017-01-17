@@ -50,6 +50,7 @@ public class RobotModule extends IterativeModule {
 
         drivetrain = new Drivetrain();
 
+        ui = new UI();
     }
 
 
