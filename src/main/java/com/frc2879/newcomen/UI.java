@@ -1,5 +1,6 @@
 package com.frc2879.newcomen;
 
+import com.frc2879.newcomen.commands.MoveSmallDistance;
 import com.frc2879.xboxcontroller.XboxController;
 
 /**
@@ -38,12 +39,30 @@ public class UI {
 	
 	private XboxController xboxController;
 	
+
 	public UI() {
-		xboxController = new XboxController(1);
+		xboxController = new XboxController(0);
+		xboxController.leftStick.setDeadZone(0.1);
+        xboxController.rightStick.setDeadZone(0.1);
+        
+        xboxController.dPad.down.whenPressed(new MoveSmallDistance("backward"));
+        xboxController.dPad.up.whenPressed(new MoveSmallDistance("forward"));
+        xboxController.dPad.right.whenPressed(new MoveSmallDistance("right"));
+        xboxController.dPad.left.whenPressed(new MoveSmallDistance("left"));
 	}
 	
 	public XboxController getXboxController() {
 		return xboxController;
 	}
+	public double getdoublefromstickname(String name) {
+        switch (name.toLowerCase()) {
+            case "leftx" : return xboxController.leftStick.getX();
+            case "lefty" : return xboxController.leftStick.getY();
+            case "rightx" : return xboxController.rightStick.getX();
+            case "righty" : return xboxController.rightStick.getY();
+            default : return 0;
+        }
+    }
+
 }
 

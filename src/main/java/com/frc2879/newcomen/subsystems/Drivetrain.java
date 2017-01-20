@@ -26,10 +26,10 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initTalonConfig() {
-	    TALONS_LF = 1;
-	    TALONS_LB = 2;
-	    TALONS_RF = 3;
-	    TALONS_RB = 4;
+	    TALONS_LF = 6;
+	    TALONS_LB = 8;
+	    TALONS_RF = 9;
+	    TALONS_RB = 7;
 
 	    talons = new CANTalon[] {
 	    		Registrar.canTalon(TALONS_LF), Registrar.canTalon(TALONS_LB),
@@ -41,7 +41,9 @@ public class Drivetrain extends Subsystem {
         }
 	    robotDrive = new RobotDrive(talons[0], talons[1], talons[2], talons[3]);
 	    robotDrive.setSafetyEnabled(false);
-	    }
+	    talons[1].setInverted(true);
+	    talons[3].setInverted(true);
+    }
 
     public void initDefaultCommand() {
 

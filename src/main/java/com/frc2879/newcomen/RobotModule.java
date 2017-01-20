@@ -1,5 +1,6 @@
 package com.frc2879.newcomen;
 
+import com.frc2879.newcomen.commands.DriveMecanum;
 import com.frc2879.newcomen.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,6 +51,7 @@ public class RobotModule extends IterativeModule {
 
         drivetrain = new Drivetrain();
 
+        ui = new UI();
     }
 
 
@@ -109,6 +111,7 @@ public class RobotModule extends IterativeModule {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        new DriveMecanum().start();
     }
 
     /**
