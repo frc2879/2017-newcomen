@@ -30,18 +30,22 @@ public class MoveSmallDistance extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (direction.toLowerCase().equals("right")){
-    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0.5, 0, 0, 0);
+    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0, 0.5, 0, 0);
+    		Timer.delay(.1);
     	} 
     	if (direction.toLowerCase().equals("left")){
-    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(-0.5, 0, 0, 0);
+    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0, -.5, 0, 0);
+    		Timer.delay(.1);
     	}
     	if (direction.toLowerCase().equals("forward")){
-    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0, 0.5, 0, 0);
+    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(-0.5, 0, 0, 0);
+    		Timer.delay(.07);
     	} 
     	if (direction.toLowerCase().equals("backward")){
-    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0, -0.5, 0, 0);
+    		RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0.5, 0, 0, 0);
+    		Timer.delay(.07);
     	} 
-    	Timer.delay(.1);
+    	
     	finished = true;
     }
     // Make this return true when this Command no longer needs to run execute()
@@ -52,6 +56,7 @@ public class MoveSmallDistance extends Command{
     // Called once after isFinished returns true
     protected void end() {
     	RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(0, 0, 0, 0);
+    	new DriveMecanum().start();
     }
 
     // Called when another command which requires one or more of the same

@@ -58,7 +58,7 @@ public class DriveMecanum extends Command{
     		x=0;
     		y=0;
     	}
-    	 RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x, y, RobotModule.ui.getXboxController().rightStick.getX(), 0);
+    	 RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(y, x, RobotModule.ui.getXboxController().rightStick.getX(), 0);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
