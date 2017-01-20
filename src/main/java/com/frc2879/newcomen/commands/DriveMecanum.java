@@ -2,7 +2,6 @@ package com.frc2879.newcomen.commands;
 
 import com.frc2879.newcomen.RobotModule;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -33,25 +32,23 @@ public class DriveMecanum extends Command{
     		y=0;
     	}
     	else if (speed<=.75){
-    		x/=speed;
-    		x *= (45/65);
-    		x += (605/650);
-    		x -= .95;
+
+    		 x /= speed;
+    		 x *= (speed * (45/65) - (45/650) + .05);
+    		 
+    		 y /= speed;
+    		 y *= (speed * (45/65) - (45/650) + .05);
     		
-    		y/=speed;
-    		y *= (45/65);
-    		y += (605/650);
-    		y -= .95;
     	}
     	
     	else if (speed <= .95){
-    		x/=speed;
-    		x *= (2.5);
-    		x -= 1.35;
     		
-    		y/=speed;
-    		y *= (2.5);
-    		y -= 1.35;
+    		x /= speed;
+    		x *= (speed * (2.5) - (2.5*.75) + .5);
+   		 
+    		y /= speed;
+    		y *= (speed * (2.5) - (2.5*.75) + .5);
+    	
     	}
     	else if (speed<=1){
     		x /= speed;
@@ -61,9 +58,7 @@ public class DriveMecanum extends Command{
     		x=0;
     		y=0;
     	}
-    	 RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,
-    			 														RobotModule.ui.getXboxController().leftStick.getY(),
-    			 														RobotModule.ui.getXboxController().rightStick.getX(), 0);
+    	 RobotModule.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x, y, RobotModule.ui.getXboxController().rightStick.getX(), 0);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
