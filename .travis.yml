@@ -1,11 +1,5 @@
 language: java
 
-install:
-  - "./gradlew assemble"
-
-script:
-  - "./gradlew verify"
-
 jdk:
   - oraclejdk8
 
@@ -16,14 +10,3 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-
-# Make NetworkTables happy
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libstdc++6
-
-notifications:
-  email: false

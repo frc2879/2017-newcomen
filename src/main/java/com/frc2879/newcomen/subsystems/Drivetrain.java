@@ -1,11 +1,10 @@
 package com.frc2879.newcomen.subsystems;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import jaci.openrio.toast.lib.registry.Registrar;
-
 /**
  *
  */
@@ -32,8 +31,8 @@ public class Drivetrain extends Subsystem {
 	    TALONS_RB = 4;
 
 	    talons = new CANTalon[] {
-	    		Registrar.canTalon(TALONS_LF), Registrar.canTalon(TALONS_LB),
-	            Registrar.canTalon(TALONS_RF), Registrar.canTalon(TALONS_RB)};
+	    		new CANTalon(TALONS_LF), new CANTalon(TALONS_LB),
+	            new CANTalon(TALONS_RF), new CANTalon(TALONS_RB)};
 	    for (CANTalon t: talons) {
             t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.enableBrakeMode(false);

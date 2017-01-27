@@ -1,74 +1,56 @@
 package com.frc2879.newcomen;
 
-import com.frc2879.newcomen.subsystems.Drivetrain;
+import com.frc2879.newcomen.subsystems.*;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import jaci.openrio.toast.core.ToastConfiguration;
-import jaci.openrio.toast.lib.log.Logger;
-import jaci.openrio.toast.lib.module.IterativeModule;
-import jaci.openrio.toast.lib.module.ModuleConfig;
-import jaci.openrio.toast.lib.state.RobotState;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RobotModule extends IterativeModule {
+public class Robot extends IterativeRobot {
 
-    public static Logger logger;
 
-    public static final String moduleName = "2016-newcomen";
-    public static final String moduleVersion = "0.1.0";
+    public static final String Name = "2016-newcomen";
+    public static final String Version = "0.2.0";
 
-    public static final String robotName = ToastConfiguration.Property.ROBOT_NAME.asString();
-    public static final int robotTeam = ToastConfiguration.Property.ROBOT_TEAM.asInt();
-    public static final String robotDesc = ToastConfiguration.Property.ROBOT_DESC.asString();
 
-    @Override
-    public String getModuleName() {
-        return moduleName;
-    }
+    public static final Drivetrain drivetrain = new Drivetrain();
 
-    @Override
-    public String getModuleVersion() {
-        return moduleVersion;
-    }
-
-    public static ModuleConfig config;
-
-    public static Drivetrain drivetrain;
-
-    public static UI ui;
+    public static OI oi;
 
     Command autonomousCommand;
 
+    //SendableChooser<Command> chooser = new SendableChooser<>();
 
+
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
     @Override
     public void robotInit() {
-        logger = new Logger("newcomen", Logger.ATTR_DEFAULT);
-        //TODO: Module Init
-
-        config = new ModuleConfig(RobotModule.moduleName);
-
-        drivetrain = new Drivetrain();
-
+        oi = new OI();
+        //chooser.addDefault("Default Auto", new ExampleCommand());
+        // chooser.addObject("My Auto", new MyAutoCommand());
+        //SmartDashboard.putData("Auto mode", chooser);
     }
 
-
-    @Override
-    public void tickState(RobotState state) {
-        Scheduler.getInstance().run();
-    }
 
     /**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
      * the robot is disabled.
      */
+    @Override
     public void disabledInit() {
 
     }
 
+    @Override
     public void disabledPeriodic() {
-        //Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     /**
@@ -82,7 +64,9 @@ public class RobotModule extends IterativeModule {
      * chooser code above (like the commented example) or additional comparisons
      * to the switch structure below with additional strings & commands.
      */
+    @Override
     public void autonomousInit() {
+        //autonomousCommand = chooser.getSelected();
 
         /*
          * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -99,28 +83,33 @@ public class RobotModule extends IterativeModule {
     /**
      * This function is called periodically during autonomous
      */
+    @Override
     public void autonomousPeriodic() {
-        //Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
+    @Override
     public void teleopInit() {
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommand != null)
+            autonomousCommand.cancel();
     }
 
     /**
      * This function is called periodically during operator control
      */
+    @Override
     public void teleopPeriodic() {
-        //Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     /**
      * This function is called periodically during test mode
      */
+    @Override
     public void testPeriodic() {
         LiveWindow.run();
     }

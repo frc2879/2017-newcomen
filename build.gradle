@@ -1,38 +1,39 @@
-/**
-This is the default build.gradle for Toast modules
-@author Jaci
-*/
-
-buildscript {
-  repositories {
-  mavenCentral()
-  maven {
-    name = "GradleRIO"
-    url = "http://dev.imjac.in/maven"
-  }
-  }
-  dependencies {
-    classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+', classifier: 'Toast'			//Change this line if you wish to Update GradleRIO
-  }
+plugins {
+    id "java"
+    id "eclipse"
+    id "idea"
+    id "jaci.openrio.gradle.GradleRIO" version "2017.1.1"
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'maven'
-apply plugin: 'GradleRIO'                                 //Apply the GradleRIO plugin
-
-repositories {
-  maven {
-    name = "Toast"
-    url = "http://dev.imjac.in/maven"
-  }
+frc {
+    team = "2879"
+    robotClass = "com.frc2879.newcomen.Robot"
 }
 
-gradlerio.team = "2879"                                 //Your FRC team number (e.g. 5333 for team 'Can't C#', or 47 for Chief Delphi)
-//gradlerio.rioIP = "10.53.33.20"                         //Uncomment to specify the IP address of the RIO
-gradlerio.deployFile = "toast/modules/${archivesBaseName}.jar"
+wpi {
+    wpilibVersion = "+"                   // The WPILib version to use. For this version of GradleRIO, must be a 2017 version
+    ntcoreVersion = "+"                   // The NetworkTables Core version to use.
+    opencvVersion = "+"                   // The OpenCV version to use
+    cscoreVersion = "+"                   // The CSCore version to use
+
+    talonSrxVersion = "+"                 // The CTRE Toolsuite (Talon SRX) version to use.
+}
 
 dependencies {
-  compile group: 'jaci.openrio.toast', name: 'Toast', version: '+'    //Change this line to update Toast
+    compile wpilib()
+    compile talonSrx()
+}
+
+def robotManifest = {
+  attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+  attributes 'Robot-Class': frc.robotClass
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
 }
