@@ -1,0 +1,3 @@
+[submodule "src/main/java/com/frc2879/xboxcontroller"]
+	path = src/main/java/com/frc2879/xboxcontroller
+	url = https://github.com/frc2879/XboxController
