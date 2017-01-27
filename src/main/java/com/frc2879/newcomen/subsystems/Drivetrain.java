@@ -1,6 +1,7 @@
 package com.frc2879.newcomen.subsystems;
 
 import com.ctre.CANTalon;
+import com.frc2879.newcomen.commands.DriveMecanum;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -46,6 +47,8 @@ public class Drivetrain extends Subsystem {
 
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	
+    	setDefaultCommand(new DriveMecanum());
     }
     public void stop() {
         robotDrive.stopMotor();
