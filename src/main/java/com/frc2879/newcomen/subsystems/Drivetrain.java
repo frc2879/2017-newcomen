@@ -48,7 +48,7 @@ public class Drivetrain extends Subsystem {
         }
 	    robotDrive = new RobotDrive(talons[0], talons[1], talons[2], talons[3]);
 	    robotDrive.setSafetyEnabled(false);
-	    }
+	}
 
     public void initDefaultCommand() {
 
@@ -64,6 +64,15 @@ public class Drivetrain extends Subsystem {
 	public  RobotDrive getRobotDrive() {
 		// TODO Auto-generated method stub
 		return robotDrive  ;
+	}
+	
+	/**
+	 * Returns the Talon with the given ID
+	 * @param i  The ID of the Talon
+	 * @return  The <code>CANTalon</code> object for the given ID
+	 */
+	public CANTalon getTalon(int id) {
+		return talons[id];
 	}
 }
     
