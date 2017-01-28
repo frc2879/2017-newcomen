@@ -10,7 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
-	public static int TALONS_LF, TALONS_LB, TALONS_RF, TALONS_RB;
+	
+	public static int TALONS_LF = 0;
+	public static int TALONS_LB = 1;
+	public static int TALONS_RF = 2;
+	public static int TALONS_RB = 3;
+	
 	public CANTalon[] talons;
 	RobotDrive robotDrive;
 	 
@@ -26,14 +31,16 @@ public class Drivetrain extends Subsystem {
     }
 
     public void initTalonConfig() {
-	    TALONS_LF = 1;
-	    TALONS_LB = 2;
-	    TALONS_RF = 3;
-	    TALONS_RB = 4;
 
 	    talons = new CANTalon[] {
 	    		new CANTalon(TALONS_LF), new CANTalon(TALONS_LB),
 	            new CANTalon(TALONS_RF), new CANTalon(TALONS_RB)};
+	    
+	    talons[0].setInverted(true);
+	    talons[1].setInverted(true);
+	    talons[2].setInverted(false);
+	    talons[3].setInverted(false);
+	    
 	    for (CANTalon t: talons) {
             t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.enableBrakeMode(false);
