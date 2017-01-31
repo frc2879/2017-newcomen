@@ -40,6 +40,9 @@ public class OI {
 	
 	public OI() {
 		xboxController = new XboxController(0);
+		
+		xboxController.rt.setTriggerSensitivity(0.3);
+		xboxController.lt.setTriggerSensitivity(0.3);
 	}
 	
 	public XboxController getXboxController() {
