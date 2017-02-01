@@ -5,6 +5,10 @@ plugins {
     id "jaci.openrio.gradle.GradleRIO" version "2017.1.1"
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 frc {
     team = "2879"
     robotClass = "com.frc2879.newcomen.Robot"
@@ -22,6 +26,7 @@ wpi {
 dependencies {
     compile wpilib()
     compile talonSrx()
+    compile 'com.github.frc2879:XboxController:1.0'
 }
 
 def robotManifest = {
