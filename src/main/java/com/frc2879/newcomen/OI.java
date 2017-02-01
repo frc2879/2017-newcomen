@@ -1,5 +1,6 @@
 package com.frc2879.newcomen;
 
+import com.frc2879.newcomen.commands.*;
 import com.frc2879.xboxcontroller.XboxController;
 
 /**
@@ -41,8 +42,11 @@ public class OI {
 	public OI() {
 		xboxController = new XboxController(0);
 		
-		xboxController.rt.setTriggerSensitivity(0.3);
-		xboxController.lt.setTriggerSensitivity(0.3);
+		xboxController.rt.setTriggerSensitivity(0.1);
+		xboxController.lt.setTriggerSensitivity(0.1);
+		
+		xboxController.lt.whenPressed(new LiftReverseCont());
+		xboxController.rt.whenPressed(new LiftForwardCont());
 	}
 	
 	public XboxController getXboxController() {
