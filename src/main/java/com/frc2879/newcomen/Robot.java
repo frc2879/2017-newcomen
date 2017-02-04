@@ -14,7 +14,8 @@ public class Robot extends IterativeRobot {
     public static final String version = "0.2.0";
 
 
-    public static final Drivetrain drivetrain = new Drivetrain();
+    public static Drivetrain drivetrain;
+    public static Lift lift;
 
     public static OI oi;
 
@@ -29,6 +30,10 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void robotInit() {
+    	// Initialize all subsystems
+    	drivetrain = new Drivetrain();
+    	lift = new Lift();
+    	
         oi = new OI();
         System.out.println("Loaded " + name + " v" + version);
         //chooser.addDefault("Default Auto", autonomousCommand);
