@@ -6,14 +6,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
 
-    public static final String Name = "2016-newcomen";
-    public static final String Version = "0.2.0";
+    public static final String name = "2017-Newcomen";
+    public static final String version = "0.2.0";
 
 
     public static final Drivetrain drivetrain = new Drivetrain();
@@ -32,8 +30,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         oi = new OI();
-        //chooser.addDefault("Default Auto", new ExampleCommand());
-        // chooser.addObject("My Auto", new MyAutoCommand());
+        System.out.println("Loaded " + name + " v" + version);
+        //chooser.addDefault("Default Auto", autonomousCommand);
         //SmartDashboard.putData("Auto mode", chooser);
     }
 

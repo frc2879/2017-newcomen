@@ -1,7 +1,6 @@
 package com.frc2879.newcomen.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -14,7 +13,7 @@ public class Lift extends Subsystem {
 
     public Lift() {
         super("Drivetrain");
-        SmartDashboard.putData(this);
+        //SmartDashboard.putData(this);
 
 
     }

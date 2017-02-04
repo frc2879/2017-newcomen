@@ -39,7 +39,7 @@ public class OI {
 	private XboxController xboxController;
 	
 	public OI() {
-		xboxController = new XboxController(1);
+		xboxController = new XboxController(0);
 	}
 	
 	public XboxController getXboxController() {

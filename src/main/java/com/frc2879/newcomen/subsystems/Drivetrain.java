@@ -5,7 +5,6 @@ import com.frc2879.newcomen.commands.DriveMecanum;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -25,7 +24,8 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
         super("Drivetrain");
-        SmartDashboard.putData(this);
+        //SmartDashboard.putData(this);
+        System.out.println("drivetrain init");
         initTalonConfig();
 
     }
@@ -56,6 +56,7 @@ public class Drivetrain extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     	
     	setDefaultCommand(new DriveMecanum());
+    	System.out.println("drivetrain default command set");
     }
     public void stop() {
         robotDrive.stopMotor();
