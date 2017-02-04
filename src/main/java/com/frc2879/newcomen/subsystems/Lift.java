@@ -3,7 +3,6 @@ package com.frc2879.newcomen.subsystems;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -19,7 +18,7 @@ public class Lift extends Subsystem {
 
     public Lift() {
         super("Lift");
-        SmartDashboard.putData(this);
+        //SmartDashboard.putData(this);
         
         liftTalon = new CANTalon(TALONS_LIFT);
     }
