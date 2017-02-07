@@ -102,11 +102,11 @@ public class Drivetrain extends Subsystem {
 	    return wheelSpeeds;
 	}
 	
-	public void setTalons(double[] speeds) {
-		talons[MotorType.kFrontLeft.value].set(MotorType.kFrontLeft.value);
-	    talons[MotorType.kFrontRight.value].set(MotorType.kFrontRight.value);
-	    talons[MotorType.kRearLeft.value].set(MotorType.kRearLeft.value);
-	    talons[MotorType.kRearRight.value].set(MotorType.kRearRight.value);
+	public void setTalons(double[] values) {
+		talons[MotorType.kFrontLeft.value].set(values[MotorType.kFrontLeft.value]);
+	    talons[MotorType.kFrontRight.value].set(values[MotorType.kFrontRight.value]);
+	    talons[MotorType.kRearLeft.value].set(values[MotorType.kRearLeft.value]);
+	    talons[MotorType.kRearRight.value].set(values[MotorType.kRearRight.value]);
 	}
 	
 	public void customMecanumDrive_Cartesian(double x, double y, double rotation) {
