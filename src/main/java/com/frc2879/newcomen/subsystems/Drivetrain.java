@@ -91,14 +91,11 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
-		double xIn = x;
-		double yIn = -y; // account for reversed y from joystick
-		
 		double[] wheelSpeeds = new double[4];
-		wheelSpeeds[MotorType.kFrontLeft.value] = xIn + yIn + rotation;
-	    wheelSpeeds[MotorType.kFrontRight.value] = -xIn + yIn - rotation;
-	    wheelSpeeds[MotorType.kRearLeft.value] = -xIn + yIn + rotation;
-	    wheelSpeeds[MotorType.kRearRight.value] = xIn + yIn - rotation;
+		wheelSpeeds[MotorType.kFrontLeft.value] = x + y + rotation;
+	    wheelSpeeds[MotorType.kFrontRight.value] = -x + y - rotation;
+	    wheelSpeeds[MotorType.kRearLeft.value] = -x + y + rotation;
+	    wheelSpeeds[MotorType.kRearRight.value] = x + y - rotation;
 	    return wheelSpeeds;
 	}
 	
@@ -110,7 +107,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void customMecanumDrive_Cartesian(double x, double y, double rotation) {
-		setTalons(mecanumSpeeds_Cartesian(x, y, rotation));
+		setTalons(mecanumSpeeds_Cartesian(x, -y, rotation)); // -y to account for reversed y from joystick
 	}
 	
 }
