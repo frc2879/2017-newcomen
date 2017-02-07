@@ -1,19 +1,23 @@
 package com.frc2879.newcomen.subsystems;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.frc2879.newcomen.commands.DriveMecanum;
 
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
 public class Drivetrain extends Subsystem {
 	
-	public static int TALONS_LF = 0;
-	public static int TALONS_LB = 1;
-	public static int TALONS_RF = 2;
-	public static int TALONS_RB = 3;
+	public static int TALONS_FRONT_LEFT = 2;
+	public static int TALONS_FRONT_RIGHT = 3;
+	public static int TALONS_REAR_LEFT = 4;
+	public static int TALONS_REAR_RIGHT = 5;
+	
+	public static int ENC_CODES_PER_REV = 2048;
 	
 	public CANTalon[] talons;
 	RobotDrive robotDrive;
@@ -29,24 +33,29 @@ public class Drivetrain extends Subsystem {
         initTalonConfig();
 
     }
+    
 
     public void initTalonConfig() {
 
 	    talons = new CANTalon[] {
-	    		new CANTalon(TALONS_LF), new CANTalon(TALONS_LB),
-	            new CANTalon(TALONS_RF), new CANTalon(TALONS_RB)};
+	    		new CANTalon(TALONS_FRONT_LEFT), new CANTalon(TALONS_FRONT_RIGHT),
+	            new CANTalon(TALONS_REAR_LEFT), new CANTalon(TALONS_REAR_RIGHT)};
 	    
-	    talons[0].setInverted(true);
-	    talons[1].setInverted(true);
-	    talons[2].setInverted(false);
-	    talons[3].setInverted(false);
+	    talons[MotorType.kFrontLeft.value].setInverted(true);
+	    talons[MotorType.kFrontRight.value].setInverted(true);
+	    talons[MotorType.kRearLeft.value].setInverted(false);
+	    talons[MotorType.kRearRight.value].setInverted(false);
 	    
 	    for (CANTalon t: talons) {
             t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.enableBrakeMode(false);
+            t.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+            t.configEncoderCodesPerRev(ENC_CODES_PER_REV);
+            t.setEncPosition(0);
             t.set(0);
         }
-	    robotDrive = new RobotDrive(talons[0], talons[1], talons[2], talons[3]);
+	    robotDrive = new RobotDrive(talons[MotorType.kFrontLeft.value], talons[MotorType.kFrontRight.value], 
+	    							talons[MotorType.kRearLeft.value], talons[MotorType.kRearRight.value]);
 	    robotDrive.setSafetyEnabled(false);
 	}
 
@@ -67,6 +76,7 @@ public class Drivetrain extends Subsystem {
 		return robotDrive  ;
 	}
 	
+	
 	/**
 	 * Returns the Talon with the given ID
 	 * @param i  The ID of the Talon
@@ -75,5 +85,33 @@ public class Drivetrain extends Subsystem {
 	public CANTalon getTalon(int id) {
 		return talons[id];
 	}
+	
+	public CANTalon getTalon(MotorType mtype) {
+		return talons[mtype.value];
+	}
+	
+	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
+		double xIn = x;
+		double yIn = -y; // account for reversed y from joystick
+		
+		double[] wheelSpeeds = new double[4];
+		wheelSpeeds[MotorType.kFrontLeft.value] = xIn + yIn + rotation;
+	    wheelSpeeds[MotorType.kFrontRight.value] = -xIn + yIn - rotation;
+	    wheelSpeeds[MotorType.kRearLeft.value] = -xIn + yIn + rotation;
+	    wheelSpeeds[MotorType.kRearRight.value] = xIn + yIn - rotation;
+	    return wheelSpeeds;
+	}
+	
+	public void setTalons(double[] speeds) {
+		talons[MotorType.kFrontLeft.value].set(MotorType.kFrontLeft.value);
+	    talons[MotorType.kFrontRight.value].set(MotorType.kFrontRight.value);
+	    talons[MotorType.kRearLeft.value].set(MotorType.kRearLeft.value);
+	    talons[MotorType.kRearRight.value].set(MotorType.kRearRight.value);
+	}
+	
+	public void customMecanumDrive_Cartesian(double x, double y, double rotation) {
+		setTalons(mecanumSpeeds_Cartesian(x, y, rotation));
+	}
+	
 }
     

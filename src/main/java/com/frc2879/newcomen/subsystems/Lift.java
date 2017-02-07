@@ -12,7 +12,7 @@ public class Lift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public static int TALONS_LIFT = 4;
+	public static int TALONS_LIFT = 6;
 	
 	CANTalon liftTalon;
 
