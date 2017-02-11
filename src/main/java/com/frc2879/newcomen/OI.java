@@ -3,6 +3,8 @@ package com.frc2879.newcomen;
 import com.frc2879.newcomen.commands.*;
 import com.frc2879.xboxcontroller.XboxController;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -38,9 +40,11 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	private XboxController xboxController;
-	
+	private Joystick flightStick;
+		
 	public OI() {
 		xboxController = new XboxController(0);
+		flightStick = new Joystick(1);
 		
 		xboxController.rt.setTriggerSensitivity(0.1);
 		xboxController.lt.setTriggerSensitivity(0.1);
@@ -51,6 +55,9 @@ public class OI {
 	
 	public XboxController getXboxController() {
 		return xboxController;
+	}
+	public Joystick getStick() {
+		return flightStick;
 	}
 }
 
