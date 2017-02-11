@@ -17,7 +17,7 @@ public class Drivetrain extends Subsystem {
 	public static int TALONS_REAR_LEFT = 4;
 	public static int TALONS_REAR_RIGHT = 5;
 	
-	public static int ENC_CODES_PER_REV = 2048;
+	public static int ENC_CODES_PER_REV = 108;
 	
 	public CANTalon[] talons;
 	RobotDrive robotDrive;
