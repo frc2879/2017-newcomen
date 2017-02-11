@@ -1,7 +1,6 @@
 package com.frc2879.newcomen;
 
 import com.frc2879.newcomen.commands.*;
-import com.frc2879.xboxcontroller.XboxController;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -39,25 +38,16 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	private XboxController xboxController;
-	private Joystick flightStick;
+	private Joystick stick;
 		
 	public OI() {
-		xboxController = new XboxController(0);
-		flightStick = new Joystick(1);
+		stick = new Joystick(0);
 		
-		xboxController.rt.setTriggerSensitivity(0.1);
-		xboxController.lt.setTriggerSensitivity(0.1);
 		
-		xboxController.lt.whenPressed(new LiftReverseCont());
-		xboxController.rt.whenPressed(new LiftForwardCont());
 	}
 	
-	public XboxController getXboxController() {
-		return xboxController;
-	}
 	public Joystick getStick() {
-		return flightStick;
+		return stick;
 	}
 }
 
