@@ -21,12 +21,12 @@ public class LiftReverseCont extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.set(-Robot.oi.getXboxController().lt.getX());
+    	//Robot.lift.set(-Robot.oi.getXboxController().lt.getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.oi.getXboxController().lt.getX() < 0.1);
+        return true; //(Robot.oi.getXboxController().lt.getX() < 0.1);
     }
 
     // Called once after isFinished returns true

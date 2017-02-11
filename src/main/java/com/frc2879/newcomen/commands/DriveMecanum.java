@@ -24,9 +24,14 @@ public class DriveMecanum extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(Robot.oi.getXboxController().leftStick.getX(),
-    			 														Robot.oi.getXboxController().leftStick.getY(),
-    			 														Robot.oi.getXboxController().rightStick.getX(), 0);
+
+    	double x= Robot.oi.getStick().getX();
+		double y= Robot.oi.getStick().getY();
+		double twist= Robot.oi.getStick().getTwist();
+
+		
+    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 0);
+
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
