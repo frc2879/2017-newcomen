@@ -21,6 +21,10 @@ public class Lift extends Subsystem {
         //SmartDashboard.putData(this);
         
         liftTalon = new CANTalon(TALONS_LIFT);
+        
+        liftTalon.enableBrakeMode(true);
+        liftTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        liftTalon.set(0);
     }
 
     public void initDefaultCommand() {

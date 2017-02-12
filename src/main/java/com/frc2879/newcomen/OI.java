@@ -3,6 +3,7 @@ package com.frc2879.newcomen;
 import com.frc2879.newcomen.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,15 +40,38 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	private Joystick stick;
+	
+	private JoystickButton[] stickButtons = new JoystickButton[13];
 		
 	public OI() {
 		stick = new Joystick(0);
+		
+		for(int i = 1; i <= 12; i++) {
+			stickButtons[i] = new JoystickButton(stick, i);
+		}
+		
+		//stickButtons[0].whileHeld(command);
+		//stickButtons[12].whileHeld(new MoveLiftStick(false));
+		//stickButtons[11].whileHeld(new MoveLiftStick(true));
+		
+		stickButtons[12].toggleWhenPressed(new MoveLiftStick(false));
+		stickButtons[11].toggleWhenPressed(new MoveLiftStick(true));
+		
+
 		
 		
 	}
 	
 	public Joystick getStick() {
 		return stick;
+	}
+	
+	public JoystickButton getStickButton(int i) {
+		return stickButtons[i];
+	}
+	
+	public double correctThrottle() {
+		return (-(stick.getThrottle()) + 1) / 2;
 	}
 }
 
