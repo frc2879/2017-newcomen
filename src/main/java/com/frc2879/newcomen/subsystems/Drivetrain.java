@@ -42,8 +42,8 @@ public class Drivetrain extends Subsystem {
 	            new CANTalon(TALONS_REAR_LEFT), new CANTalon(TALONS_REAR_RIGHT)};
 	    
 	    talons[MotorType.kFrontLeft.value].setInverted(true);
-	    talons[MotorType.kFrontRight.value].setInverted(true);
-	    talons[MotorType.kRearLeft.value].setInverted(false);
+	    talons[MotorType.kFrontRight.value].setInverted(false);
+	    talons[MotorType.kRearLeft.value].setInverted(true);
 	    talons[MotorType.kRearRight.value].setInverted(false);
 	    
 	    for (CANTalon t: talons) {
@@ -54,8 +54,8 @@ public class Drivetrain extends Subsystem {
             t.setEncPosition(0);
             t.set(0);
         }
-	    robotDrive = new RobotDrive(talons[MotorType.kFrontLeft.value], talons[MotorType.kFrontRight.value], 
-	    							talons[MotorType.kRearLeft.value], talons[MotorType.kRearRight.value]);
+	    robotDrive = new RobotDrive(talons[MotorType.kFrontLeft.value], talons[MotorType.kRearLeft.value], 
+	    							talons[MotorType.kFrontRight.value], talons[MotorType.kRearRight.value]);
 	    robotDrive.setSafetyEnabled(false);
 	}
 

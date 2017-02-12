@@ -29,7 +29,7 @@ public class DriveMecanum extends Command{
 		double y= Robot.oi.getStick().getY();
 		double twist= Robot.oi.getStick().getTwist() * 0.5;
 
-		if(Robot.oi.getStickButton(0).get()) {
+		if(Robot.oi.getStickButton(1).get()) {
 			x *= 0.5;
 			y *= 0.5;
 		}

@@ -41,17 +41,23 @@ public class OI {
 	
 	private Joystick stick;
 	
-	private JoystickButton[] stickButtons = new JoystickButton[10];
+	private JoystickButton[] stickButtons = new JoystickButton[13];
 		
 	public OI() {
 		stick = new Joystick(0);
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 1; i <= 12; i++) {
 			stickButtons[i] = new JoystickButton(stick, i);
 		}
 		
 		//stickButtons[0].whileHeld(command);
+		//stickButtons[12].whileHeld(new MoveLiftStick(false));
+		//stickButtons[11].whileHeld(new MoveLiftStick(true));
 		
+		stickButtons[12].toggleWhenPressed(new MoveLiftStick(false));
+		stickButtons[11].toggleWhenPressed(new MoveLiftStick(true));
+		
+
 		
 		
 	}
@@ -62,6 +68,10 @@ public class OI {
 	
 	public JoystickButton getStickButton(int i) {
 		return stickButtons[i];
+	}
+	
+	public double correctThrottle() {
+		return (-(stick.getThrottle()) + 1) / 2;
 	}
 }
 

@@ -3,14 +3,17 @@ package com.frc2879.newcomen.commands;
 import com.frc2879.newcomen.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftForwardCont extends Command {
+public class MoveLiftStick extends Command {
 
-
-    public LiftForwardCont() {
+	boolean reverseDirection = false;
+	
+    public MoveLiftStick(boolean reverse) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        super("LiftForwardCont");
+        super("MoveLiftStick");
         requires(Robot.lift);
+        
+        this.reverseDirection = reverse;
     }
     
 
@@ -21,12 +24,13 @@ public class LiftForwardCont extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.lift.set(Robot.oi.getXboxController().rt.getX());
+    	System.out.println("move stick " + reverseDirection + " " + Robot.oi.correctThrottle());
+    	Robot.lift.set(reverseDirection ? -Robot.oi.correctThrottle() : Robot.oi.correctThrottle());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true; //(Robot.oi.getXboxController().rt.getX() < 0.1);
+        return false;
     }
 
     // Called once after isFinished returns true
