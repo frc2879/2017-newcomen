@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends Subsystem {
 	
-	public static int TALONS_FRONT_LEFT = 2;
-	public static int TALONS_FRONT_RIGHT = 3;
-	public static int TALONS_REAR_LEFT = 4;
-	public static int TALONS_REAR_RIGHT = 5;
+	private static int TALONS_FRONT_LEFT = 2;
+	private static int TALONS_FRONT_RIGHT = 3;
+	private static int TALONS_REAR_LEFT = 4;
+	private static int TALONS_REAR_RIGHT = 5;
 	
-	public static int ENC_CODES_PER_REV = 108;
+	private static int ENC_CODES_PER_REV = 108;
 	
-	public CANTalon[] talons;
-	RobotDrive robotDrive;
+	private CANTalon[] talons;
+	private RobotDrive robotDrive;
 	 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
