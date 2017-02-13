@@ -12,11 +12,15 @@ public class Lift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public static int TALONS_LIFT = 6;
+	private static int TALONS_LIFT = 6;
 	
-	CANTalon liftTalon;
+	private CANTalon liftTalon;
 
-    public Lift() {
+    public CANTalon getLiftTalon() {
+		return liftTalon;
+	}
+
+	public Lift() {
         super("Lift");
         //SmartDashboard.putData(this);
         

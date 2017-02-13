@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveLiftStick extends Command {
 
-	boolean reverseDirection = false;
+	private boolean reverseDirection = false;
 	
     public MoveLiftStick(boolean reverse) {
         // Use requires() here to declare subsystem dependencies
