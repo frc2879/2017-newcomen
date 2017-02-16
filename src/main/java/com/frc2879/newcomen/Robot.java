@@ -16,6 +16,7 @@ public class Robot extends IterativeRobot {
 
     public static Drivetrain drivetrain;
     public static Lift lift;
+    public static IMU imu;
 
     public static OI oi;
 
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
     	// Initialize all subsystems
     	drivetrain = new Drivetrain();
     	lift = new Lift();
+    	imu = new IMU();
     	
         oi = new OI();
         System.out.println("Loaded " + name + " v" + version);
