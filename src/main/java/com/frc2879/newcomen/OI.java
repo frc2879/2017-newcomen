@@ -57,6 +57,8 @@ public class OI {
 		stickButtons[12].toggleWhenPressed(new MoveLiftStick(false));
 		stickButtons[11].toggleWhenPressed(new MoveLiftStick(true));
 		
+		stickButtons[10].toggleWhenPressed(new DriveMecanum(true));
+		
 
 		
 		

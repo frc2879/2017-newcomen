@@ -10,12 +10,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveMecanum extends Command{
     
+	private boolean fieldOriented;
+	
 	public DriveMecanum(){
+		this(false);
+    }
+	
+	public DriveMecanum(boolean fieldOriented){
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         super("DriveMecanum");
         requires(Robot.drivetrain);
-       
     }
 
     // Called just before this Command runs the first time
@@ -34,7 +39,7 @@ public class DriveMecanum extends Command{
 			y *= 0.5;
 		}
 		
-    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 0);
+    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, fieldOriented ? Robot.imu.getGyroYaw() : 0);
 
     }
     // Make this return true when this Command no longer needs to run execute()
