@@ -19,6 +19,14 @@ public class Drivetrain extends Subsystem {
 	
 	private static int ENC_CODES_PER_REV = 108;
 	
+	// PID values, need to be calibrated
+	private static double TALONS_P = 0;
+	private static double TALONS_I = 0;
+	private static double TALONS_D = 0;
+	private static double TALONS_F = 0;
+	private static int TALONS_IZONE = 0;
+	
+	
 	private CANTalon[] talons;
 	private RobotDrive robotDrive;
 	 
@@ -52,6 +60,12 @@ public class Drivetrain extends Subsystem {
             t.setFeedbackDevice(FeedbackDevice.QuadEncoder);
             t.configEncoderCodesPerRev(ENC_CODES_PER_REV);
             t.setEncPosition(0);
+            
+            t.setProfile(0);
+            t.setF(TALONS_F);
+            t.setPID(TALONS_P, TALONS_I, TALONS_D);
+            t.setIZone(TALONS_IZONE);
+            
             t.set(0);
         }
 	    robotDrive = new RobotDrive(talons[MotorType.kFrontLeft.value], talons[MotorType.kRearLeft.value], 
