@@ -21,6 +21,7 @@ public class DriveMecanum extends Command{
         // eg. requires(chassis);
         super("DriveMecanum");
         requires(Robot.drivetrain);
+        this.fieldOriented = fieldOriented;
     }
 
     // Called just before this Command runs the first time
