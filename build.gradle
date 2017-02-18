@@ -27,7 +27,6 @@ wpi {
 dependencies {
     compile wpilib()
     compile talonSrx()
-    compile 'com.github.frc2879:XboxController:1.0'
     compile 'com.kauailabs:navx_frc:3.0.323'
 }
 
