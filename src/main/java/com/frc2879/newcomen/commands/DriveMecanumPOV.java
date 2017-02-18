@@ -24,8 +24,7 @@ public class DriveMecanumPOV extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	Robot.drivetrain.getRobotDrive().mecanumDrive_Polar(magnitude, Robot.oi.getStick().getPOV(),
-    			Robot.settings.getBoolean("fieldoriented", false) ? Robot.imu.getGyroYaw() : 0);
+    	Robot.drivetrain.getRobotDrive().mecanumDrive_Polar(magnitude, Robot.oi.getStick().getPOV(),0);
     	
     }
     // Make this return true when this Command no longer needs to run execute()
