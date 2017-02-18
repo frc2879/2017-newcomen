@@ -66,7 +66,7 @@ public class OI {
 		
 		stickButtons[10].whenPressed(new ToggleBooleanSetting("fieldoriented"));
 
-		pov.whileActive(new DriveMecanumPOV(0.5));
+		pov.whileActive(new DriveMecanumPOV(0.25));
 		
 	}
 	
