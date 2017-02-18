@@ -1,5 +1,8 @@
 package com.frc2879.newcomen;
 
+import java.util.HashMap;
+
+import com.frc2879.newcomen.controls.OI;
 import com.frc2879.newcomen.subsystems.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -13,13 +16,14 @@ public class Robot extends IterativeRobot {
     public static final String name = "2017-Newcomen";
     public static final String version = "0.2.0";
 
-
+    public static SettingsRegister settings = new SettingsRegister();
+    
     public static Drivetrain drivetrain;
     public static Lift lift;
     public static IMU imu;
 
     public static OI oi;
-
+        
     Command autonomousCommand;
 
     //SendableChooser<Command> chooser = new SendableChooser<>();

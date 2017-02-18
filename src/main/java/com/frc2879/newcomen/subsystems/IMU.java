@@ -1,5 +1,6 @@
 package com.frc2879.newcomen.subsystems;
 
+import com.frc2879.newcomen.Robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -53,5 +54,6 @@ public class IMU extends Subsystem {
     public void resetGyroYaw() {
         ahrs.reset();
     }
+    
 }
 

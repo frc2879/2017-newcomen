@@ -8,20 +8,20 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  */
-public class DriveMecanum extends Command{
+public class DriveMecanumStick extends Command{
     
-	private boolean fieldOriented;
+	private double sensitivity;
 	
-	public DriveMecanum(){
-		this(false);
+	public DriveMecanumStick(){
+		this(1);
     }
 	
-	public DriveMecanum(boolean fieldOriented){
+	public DriveMecanumStick(double sensitivity){
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         super("DriveMecanum");
         requires(Robot.drivetrain);
-        this.fieldOriented = fieldOriented;
+        this.sensitivity = sensitivity;
     }
 
     // Called just before this Command runs the first time
@@ -31,17 +31,12 @@ public class DriveMecanum extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	double x= Robot.oi.getStick().getX();
-		double y= Robot.oi.getStick().getY();
+    	double x= Robot.oi.getStick().getX() * sensitivity;
+		double y= Robot.oi.getStick().getY() * sensitivity;
 		double twist= Robot.oi.getStick().getTwist() * 0.5;
-
-		if(Robot.oi.getStickButton(1).get()) {
-			x *= 0.5;
-			y *= 0.5;
-		}
 		
-    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, fieldOriented ? Robot.imu.getGyroYaw() : 0);
-
+    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 
+    			Robot.settings.getBoolean("fieldoriented", false) ? Robot.imu.getGyroYaw() : 0);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

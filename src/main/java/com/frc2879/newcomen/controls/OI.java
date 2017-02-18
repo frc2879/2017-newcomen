@@ -1,5 +1,6 @@
-package com.frc2879.newcomen;
+package com.frc2879.newcomen.controls;
 
+import com.frc2879.newcomen.Robot;
 import com.frc2879.newcomen.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,15 +42,21 @@ public class OI {
 	
 	private Joystick stick;
 	
-	private JoystickButton[] stickButtons = new JoystickButton[13];
+	private JoystickButton[] stickButtons;
+	
+	private JoystickPOVTrigger pov;
 		
 	public OI() {
 		stick = new Joystick(0);
 		
-		for(int i = 1; i <= 12; i++) {
+		stickButtons = new JoystickButton[stick.getButtonCount() + 1];
+		
+		for(int i = 1; i <= stick.getButtonCount(); i++) {
 			stickButtons[i] = new JoystickButton(stick, i);
 		}
 		
+		pov = new JoystickPOVTrigger(stick);
+				
 		//stickButtons[0].whileHeld(command);
 		//stickButtons[12].whileHeld(new MoveLiftStick(false));
 		//stickButtons[11].whileHeld(new MoveLiftStick(true));
@@ -57,11 +64,16 @@ public class OI {
 		stickButtons[12].toggleWhenPressed(new MoveLiftStick(false));
 		stickButtons[11].toggleWhenPressed(new MoveLiftStick(true));
 		
-		stickButtons[10].toggleWhenPressed(new DriveMecanum(true));
+		stickButtons[10].whenPressed(new ToggleBooleanSetting("fieldoriented"));
 		
+		stickButtons[1].whileHeld(new DriveMecanumStick(0.5));
 
+		pov.whileActive(new DriveMecanumPOV(0.25));
 		
-		
+	}
+	
+	public JoystickPOVTrigger getPOVTrigger() {
+		return pov;
 	}
 	
 	public Joystick getStick() {
