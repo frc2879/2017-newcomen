@@ -49,9 +49,9 @@ public class OI {
 	public OI() {
 		stick = new Joystick(0);
 		
-		stickButtons = new JoystickButton[stick.getButtonCount() + 1];
+		stickButtons = new JoystickButton[13];
 		
-		for(int i = 1; i <= stick.getButtonCount(); i++) {
+		for(int i = 1; i < 13; i++) {
 			stickButtons[i] = new JoystickButton(stick, i);
 		}
 		
