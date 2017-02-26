@@ -31,9 +31,9 @@ public class DriveMecanumStick extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	double x= Robot.oi.getStick().getX() * sensitivity;
-		double y= Robot.oi.getStick().getY() * sensitivity;
-		double twist= Robot.oi.getStick().getTwist() * 0.5;
+    	double x= Robot.oi.getStickX() * sensitivity;
+		double y= Robot.oi.getStickY() * sensitivity;
+		double twist= Robot.oi.getStickTwist() * 0.5;
 		
     	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 
     			Robot.settings.getBoolean("fieldoriented", false) ? Robot.imu.getGyroYaw() : 0);

@@ -40,12 +40,17 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
+	private double xDeadZone = 0.01;
+	private double yDeadZone = 0.01;
+	private double zDeadZone = 0.01;
+	private double twistDeadZone = 0.01;
+	
 	private Joystick stick;
 	
 	private JoystickButton[] stickButtons;
 	
 	private JoystickPOVTrigger pov;
-		
+			
 	public OI() {
 		stick = new Joystick(0);
 		
@@ -72,6 +77,52 @@ public class OI {
 		
 	}
 	
+    /**
+     * From https://github.com/frc2879/XboxController/
+     * 
+     * Creates a deadzone, but without clipping the lower values.
+     * turns this
+     * |--1--2--3--4--5--|
+     * into this
+     * ______|-1-2-3-4-5-|
+     * @param input
+     * @param deadZoneSize
+     * @return adjusted_input
+     */
+    private static double createDeadZone(double input, double deadZoneSize) {
+        final   double  negative;
+                double  deadZoneSizeClamp = deadZoneSize;
+                double  adjusted;
+        
+        if (deadZoneSizeClamp < 0 || deadZoneSizeClamp >= 1) {
+            deadZoneSizeClamp = 0;  // Prevent any weird errors
+        }
+        
+        negative    = input < 0 ? -1 : 1;
+        
+        adjusted    = Math.abs(input) - deadZoneSizeClamp;  // Subtract the deadzone from the magnitude
+        adjusted    = adjusted < 0 ? 0 : adjusted;          // if the new input is negative, make it zero
+        adjusted    = adjusted / (1 - deadZoneSizeClamp);   // Adjust the adjustment so it can max at 1
+        
+        return negative * adjusted;
+    }
+	
+	public double getStickX() {
+		return createDeadZone(stick.getX(), xDeadZone);
+	}
+
+	public double getStickY() {
+		return createDeadZone(stick.getY(), yDeadZone);
+	}
+
+	public double getStickZ() {
+		return createDeadZone(stick.getZ(), zDeadZone);
+	}
+
+	public double getStickTwist() {
+		return createDeadZone(stick.getTwist(), twistDeadZone);
+	}
+
 	public JoystickPOVTrigger getPOVTrigger() {
 		return pov;
 	}
