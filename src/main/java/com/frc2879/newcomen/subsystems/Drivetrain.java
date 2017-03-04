@@ -92,14 +92,20 @@ public class Drivetrain extends Subsystem {
 	
 	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
 		double[] wheelSpeeds = new double[4];
-		double k1, k2, k3, k4, pr, x1, y1, x2, y2, x3, y3, x4, y4;
+		double k1, k2, k3, k4, pr, x1=1, y1=1, x2=1, y2=y1, x3=x2, y3=1, x4=x2, y4=y3, rotationRatio, maxRotVel,rr;
 		//split motion into other axes, 
-		k1= x+y;
-		k2= -x+y;
-		k3= -x+y;
-		k4= x+y;
-		//primary rotation (pr)
-		pr=(k1(x1-y1)+k2(x1+y1));
+		k1= (x+y);
+		k2= (-x+y);
+		k3= (-x+y);
+		k4= (x+y);
+		rotationRatio = -y1/y4;
+		maxRotVel = (x1+y1-x2-y2-x3-y3+x4+y4);
+		//scaled primary rotation (pr) (pos. is counter clock)
+		pr=(k1*(x1-y1)+k2*(x2+y2)+k3*(x3+y3)+k4*(x4-y4))/maxRotVel;
+		// scaled additional required rotation
+		rr = pr+rotation;
+		//
+		
 		
 		wheelSpeeds[MotorType.kFrontLeft.value] = x + y + rotation;
 	    wheelSpeeds[MotorType.kFrontRight.value] = -x + y - rotation;
