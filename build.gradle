@@ -2,11 +2,12 @@ plugins {
     id "java"
     id "eclipse"
     id "idea"
-    id "jaci.openrio.gradle.GradleRIO" version "2017.1.1"
+    id "jaci.openrio.gradle.GradleRIO" version "2017.1.2"
 }
 
 repositories {
     maven { url 'https://jitpack.io' }
+    maven { url 'https://frc2879.github.io/maven' }
 }
 
 frc {
@@ -21,12 +22,13 @@ wpi {
     cscoreVersion = "+"                   // The CSCore version to use
 
     talonSrxVersion = "+"                 // The CTRE Toolsuite (Talon SRX) version to use.
+    navxVersion = "+"                     // The NavX Library version to use.
 }
 
 dependencies {
     compile wpilib()
     compile talonSrx()
-    compile 'com.github.frc2879:XboxController:1.0'
+    compile 'com.kauailabs:navx_frc:3.0.323'
 }
 
 def robotManifest = {

@@ -2,7 +2,7 @@ package com.frc2879.newcomen.subsystems;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
-import com.frc2879.newcomen.commands.DriveMecanum;
+import com.frc2879.newcomen.commands.DriveMecanumStick;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
@@ -64,7 +64,7 @@ public class Drivetrain extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	
-    	setDefaultCommand(new DriveMecanum());
+    	setDefaultCommand(new DriveMecanumStick());
     	System.out.println("drivetrain default command set");
     }
     public void stop() {

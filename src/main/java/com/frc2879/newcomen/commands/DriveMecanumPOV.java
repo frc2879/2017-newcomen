@@ -1,41 +1,31 @@
 package com.frc2879.newcomen.commands;
 
 import com.frc2879.newcomen.Robot;
+import com.frc2879.newcomen.controls.JoystickPOVTrigger;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
+public class DriveMecanumPOV extends Command {
 
-/**
- */
-public class DriveMecanum extends Command{
-    
-	public DriveMecanum(){
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        super("DriveMecanum");
+	private double magnitude;
+	
+	public DriveMecanumPOV(double magnitude) {
+		// TODO Auto-generated constructor stub
+		super("DriveMecanumPolar");
         requires(Robot.drivetrain);
-       
-    }
+		this.magnitude = magnitude;
+	}
+	
 
-    // Called just before this Command runs the first time
+	 // Called just before this Command runs the first time
     protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	double x= Robot.oi.getStick().getX();
-		double y= Robot.oi.getStick().getY();
-		double twist= Robot.oi.getStick().getTwist() * 0.5;
-
-		if(Robot.oi.getStickButton(1).get()) {
-			x *= 0.5;
-			y *= 0.5;
-		}
-		
-    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 0);
-
+    	Robot.drivetrain.getRobotDrive().mecanumDrive_Polar(magnitude, Robot.oi.getStick().getPOV(),0);
+    	
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -51,6 +41,5 @@ public class DriveMecanum extends Command{
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-
 
 }
