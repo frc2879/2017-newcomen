@@ -92,7 +92,7 @@ public class Drivetrain extends Subsystem {
 	
 	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
 		double[] wheelSpeeds = new double[4];
-		double k1, k2, k3, k4, pr, x1=1, y1=1, x2=1, y2=y1, x3=x2, y3=1, x4=x2, y4=y3, rotationRatio, maxRotVel,rr;
+		double k1, k2, k3, k4, pr, x1=1, y1=1, x2=1, y2=y1, x3=x2, y3=1, x4=x2, y4=y3, rotationRatio, maxRotVel,rr, multiplier=1;
 		//split motion into other axes, 
 		k1= (x+y);
 		k2= (-x+y);
@@ -101,17 +101,35 @@ public class Drivetrain extends Subsystem {
 		rotationRatio = -y1/y4;
 		maxRotVel = (x1+y1-x2-y2-x3-y3+x4+y4);
 		//scaled primary rotation (pr) (pos. is counter clock)
-		pr=(k1*(x1-y1)+k2*(x2+y2)+k3*(x3+y3)+k4*(x4-y4))/maxRotVel;
+		pr=(k1*(x1-y1)+(k2*(x2+y2))+(k3*(x3+y3))+(k4*(x4-y4)))/maxRotVel;
 		// scaled additional required rotation
 		rr = pr+rotation;
 		//
 		
 		
-		wheelSpeeds[MotorType.kFrontLeft.value] = x + y + rotation;
-	    wheelSpeeds[MotorType.kFrontRight.value] = -x + y - rotation;
-	    wheelSpeeds[MotorType.kRearLeft.value] = -x + y + rotation;
-	    wheelSpeeds[MotorType.kRearRight.value] = x + y - rotation;
+		wheelSpeeds[MotorType.kFrontLeft.value] = x + y + (rotationRatio*rr);
+	    wheelSpeeds[MotorType.kFrontRight.value] = -x + y - rr;
+	    wheelSpeeds[MotorType.kRearLeft.value] = -x + y + rr;
+	    wheelSpeeds[MotorType.kRearRight.value] = x + y - (rotationRatio*rr);
+	    if ((x + y + (rotationRatio*rr)) > 1){
+	    	multiplier /= (x + y + (rotationRatio*rr));
+	    }	
+	    if ((-x + y - rr)*multiplier > 1){
+	    	multiplier /= (-x + y - rr);
+	    }
+	    if ((-x + y + rr)*multiplier > 1){
+	    	multiplier /= (-x + y + rr);
+	    }
+	    if ((x + y - (rotationRatio*rr))*multiplier > 1){
+	    	multiplier /= (x + y - (rotationRatio*rr));
+	    }
+	    
+	    wheelSpeeds[MotorType.kFrontLeft.value] *= multiplier;
+	    wheelSpeeds[MotorType.kFrontRight.value] *= multiplier;
+	    wheelSpeeds[MotorType.kRearLeft.value] *= multiplier;
+	    wheelSpeeds[MotorType.kRearRight.value] *= multiplier;
 	    return wheelSpeeds;
+	  
 	}
 	
 	public void setTalons(double[] values) {
