@@ -41,6 +41,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	private Joystick stick;
+	private Joystick kidstick;
 	
 	private JoystickButton[] stickButtons;
 	
@@ -48,6 +49,7 @@ public class OI {
 		
 	public OI() {
 		stick = new Joystick(0);
+		kidstick = new Joystick(1);
 		
 		stickButtons = new JoystickButton[13];
 		
@@ -66,6 +68,7 @@ public class OI {
 		
 		stickButtons[10].whenPressed(new ToggleBooleanSetting("fieldoriented"));
 		
+		stickButtons[2].whenPressed(new DriveMecanumStick(.19));
 		stickButtons[1].whileHeld(new DriveMecanumStick(0.5));
 
 		pov.whileActive(new DriveMecanumPOV(0.25));
@@ -78,6 +81,9 @@ public class OI {
 	
 	public Joystick getStick() {
 		return stick;
+	}
+	public Joystick getKidStick() {
+		return kidstick;
 	}
 	
 	public JoystickButton getStickButton(int i) {
