@@ -36,7 +36,7 @@ public class DriveMecanumStick extends Command{
 		
 		if (sensitivity <= .2){
 		x= Robot.oi.getKidStick().getX() * sensitivity;
-		y= Robot.oi.getKidStick().getY() * sensitivity;
+		y= Robot.oi.getKidStick().getY() *2* sensitivity;
 		twist=0;
 		}
 		Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 
