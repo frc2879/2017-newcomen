@@ -92,7 +92,7 @@ public class Drivetrain extends Subsystem {
 	
 	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
 		double[] wheelSpeeds = new double[4];
-		double k1, k2, k3, k4, pr, x1=-11.25, y1=6.5, x2=11.25, y2=y1, x3=x2, y3=-7.5, x4=x2, y4=y3, rotationRatio, maxRotVel,rr, multiplier=1;
+		double k1, k2, k3, k4, pr, x1=-11.25, y1=6.75, x2=11.25, y2=y1, x3=x2, y3=-7.25, x4=x2, y4=y3, rotationRatio, maxRotVel,rr, multiplier=1;
 		//split motion into other axes, 
 		k1= (x+y);
 		k2= (-x+y);
