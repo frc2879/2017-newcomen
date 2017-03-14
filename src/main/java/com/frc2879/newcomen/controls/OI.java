@@ -54,6 +54,7 @@ public class OI {
 	public OI() {
 		stick = new Joystick(0);
 		
+		
 		stickButtons = new JoystickButton[13];
 		
 		for(int i = 1; i < 13; i++) {
@@ -70,6 +71,7 @@ public class OI {
 		stickButtons[11].toggleWhenPressed(new MoveLiftStick(true));
 		
 		stickButtons[10].whenPressed(new ToggleBooleanSetting("fieldoriented"));
+		
 		
 		stickButtons[1].whileHeld(new DriveMecanumStick(0.5));
 

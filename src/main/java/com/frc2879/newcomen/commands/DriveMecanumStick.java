@@ -2,7 +2,6 @@ package com.frc2879.newcomen.commands;
 
 import com.frc2879.newcomen.Robot;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -35,7 +34,8 @@ public class DriveMecanumStick extends Command{
 		double y= Robot.oi.getStickY() * sensitivity;
 		double twist= Robot.oi.getStickTwist() * 0.5;
 		
-    	Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 
+		
+		Robot.drivetrain.getRobotDrive().mecanumDrive_Cartesian(x,y,twist, 
     			Robot.settings.getBoolean("fieldoriented", false) ? Robot.imu.getGyroYaw() : 0);
     }
     // Make this return true when this Command no longer needs to run execute()
