@@ -92,36 +92,48 @@ public class Drivetrain extends Subsystem {
 	
 	public double[] mecanumSpeeds_Cartesian(double x, double y, double rotation) {
 		double[] wheelSpeeds = new double[4];
-		double k1, k2, k3, k4, pr, x1 = -11.25, y1 = 6.75, x2 = 11.25, y2 = y1, x3 = x2, y3 = -7.25, x4 = x2, y4 = y3,
-				rotationRatio, maxRotVel, rr, multiplier = 1;
+		double k1, k2, k3, k4, 
+		pr, // primary rotation
+		// wheel positions relative to center of mass:
+		x1 = -11.25, 
+		y1 = 6.75,
+		x2 = 11.25, 
+		y2 = y1,
+		x3 = x1, 
+		y3 = -7.25, 
+		x4 = x2, 
+		y4 = y3,
+		rotationRatio, maxRotVel, rr, multiplier = 1;
 		// split motion into other axes,
 		k1 = (x + y);
 		k2 = (-x + y);
 		k3 = (-x + y);
 		k4 = (x + y);
 		rotationRatio = -y1 / y4;
-		maxRotVel = (x1 + y1 - x2 - y2 - x3 - y3 + x4 + y4);
+		maxRotVel = (x1 - y1 - x2 - y2 + x3 + y3 + x4 - y4);
 		// scaled primary rotation (pr) (pos. is counter clock)
 		pr = (k1 * (x1 - y1) + (k2 * (x2 + y2)) + (k3 * (x3 + y3)) + (k4 * (x4 - y4))) / maxRotVel;
 		// scaled additional required rotation
 		rr = pr + rotation;
 		
-		if ((x + y + (rotationRatio * rr)) > 1) {
+		if (Math.abs((x + y + (rotationRatio * rr))) > 1) {
 			multiplier /= (x + y + (rotationRatio * rr));
 		}
-		if ((-x + y - rr) * multiplier > 1) {
+		if (Math.abs((-x + y - rr) * multiplier) > 1) {
 			multiplier /= (-x + y - rr);
 		}
-		if ((-x + y + rr) * multiplier > 1) {
+		if (Math.abs((-x + y + rr) * multiplier) > 1) {
 			multiplier /= (-x + y + rr);
 		}
-		if ((x + y - (rotationRatio * rr)) * multiplier > 1) {
+		if (Math.abs((x + y - (rotationRatio * rr)) * multiplier) > 1) {
 			multiplier /= (x + y - (rotationRatio * rr));
 		}
+		
+		multiplier = Math.abs(multiplier);
 
-		wheelSpeeds[MotorType.kFrontLeft.value] = (k1 + (rotationRatio * rr)) * multiplier;
+		wheelSpeeds[MotorType.kFrontLeft.value] = (k1 + rr) * multiplier;
 		wheelSpeeds[MotorType.kFrontRight.value] = (k2 - rr) * multiplier;
-		wheelSpeeds[MotorType.kRearLeft.value] = (k3 + rr) * multiplier;
+		wheelSpeeds[MotorType.kRearLeft.value] = (k3 + (rotationRatio * rr)) * multiplier;
 		wheelSpeeds[MotorType.kRearRight.value] = (k4 - (rotationRatio * rr)) * multiplier;
 
 		return wheelSpeeds;
