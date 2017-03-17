@@ -29,6 +29,7 @@ dependencies {
     compile wpilib()
     compile talonSrx()
     compile 'com.kauailabs:navx_frc:3.0.323'
+    compile 'com.github.floogulinc:pathfinder:jitpack-build-SNAPSHOT'
 }
 
 def robotManifest = {
