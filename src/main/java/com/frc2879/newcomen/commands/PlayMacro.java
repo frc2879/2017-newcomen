@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import com.ctre.CANTalon;
 import com.frc2879.newcomen.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -51,8 +52,9 @@ public class PlayMacro extends Command {
     	t_delta = nextDouble - timer.get();
     	
     	if (t_delta <= 0) {
-    		Robot.drivetrain.setTalons(new double[] {scanner.nextDouble(),
-    				scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()});
+    		for(CANTalon t : Robot.drivetrain.getTalons()) {
+				t.set(scanner.nextDouble());
+			}
     	
     		onTime = true;
     	} else {
