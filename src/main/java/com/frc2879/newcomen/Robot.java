@@ -2,13 +2,18 @@ package com.frc2879.newcomen;
 
 import java.util.HashMap;
 
+import com.frc2879.newcomen.commands.PlayMacro;
+import com.frc2879.newcomen.commands.RecordMacro;
 import com.frc2879.newcomen.controls.OI;
 import com.frc2879.newcomen.subsystems.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
@@ -26,7 +31,7 @@ public class Robot extends IterativeRobot {
         
     Command autonomousCommand;
 
-    //SendableChooser<Command> chooser = new SendableChooser<>();
+    SendableChooser<Command> chooser = new SendableChooser<>();
 
 
     /**
@@ -42,8 +47,12 @@ public class Robot extends IterativeRobot {
     	
         oi = new OI();
         System.out.println("Loaded " + name + " v" + version);
-        //chooser.addDefault("Default Auto", autonomousCommand);
-        //SmartDashboard.putData("Auto mode", chooser);
+        chooser.addDefault("Auto 3", new PlayMacro("AutoRecord3"));
+        chooser.addObject("Auto 4", new PlayMacro("AutoRecord4"));
+        chooser.addObject("Auto 5", new PlayMacro("AutoRecord5"));
+        chooser.addObject("Auto 6", new PlayMacro("AutoRecord6"));
+        chooser.addObject("No Auto", new InstantCommand());
+        SmartDashboard.putData("Auto mode", chooser);
     }
 
 
@@ -75,7 +84,8 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void autonomousInit() {
-        //autonomousCommand = chooser.getSelected();
+    	System.out.println("auto init");
+        autonomousCommand = chooser.getSelected();
 
         /*
          * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -85,8 +95,10 @@ public class Robot extends IterativeRobot {
          */
 
         // schedule the autonomous command (example)
-        if (autonomousCommand != null)
-            autonomousCommand.start();
+		if (autonomousCommand != null) {
+			System.out.println("Running " + autonomousCommand.getName());
+			autonomousCommand.start();
+		}
     }
 
     /**

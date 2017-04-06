@@ -35,6 +35,8 @@ public class RecordMacro extends Command {
 		}
     	
     	timer.start();
+    	
+    	System.out.println("recording " + macroName);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,7 +45,7 @@ public class RecordMacro extends Command {
 			recordFile.append("" + timer.get());
 			
 			for(CANTalon t : Robot.drivetrain.getTalons()) {
-				recordFile.append("," + t.get());
+				recordFile.append("," + t.getSetpoint());
 			}
 			
 			recordFile.append("\n");
@@ -71,6 +73,7 @@ public class RecordMacro extends Command {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("done recording " + macroName);
 	}
 
     // Called when another command which requires one or more of the same

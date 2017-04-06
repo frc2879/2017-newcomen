@@ -24,7 +24,7 @@ public class PlayMacro extends Command {
 
 	public PlayMacro(String macroName) {
 		// TODO Auto-generated constructor stub
-		super("PlayMacro");
+		super("PlayMacro " + macroName);
 		this.macroName = macroName;
 		requires(Robot.drivetrain);
 	}
@@ -39,6 +39,7 @@ public class PlayMacro extends Command {
 			e.printStackTrace();
 		}
     	timer.start();
+    	System.out.println("playing macro " + macroName);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -62,7 +63,7 @@ public class PlayMacro extends Command {
     	}
     	
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return scanner == null || !scanner.hasNextDouble();
@@ -75,6 +76,7 @@ public class PlayMacro extends Command {
 			scanner.close();
 			scanner = null;
 		}
+    	System.out.println("done playing macro " + macroName);
 	}
 
     // Called when another command which requires one or more of the same
