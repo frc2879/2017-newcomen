@@ -86,6 +86,10 @@ public class Drivetrain extends Subsystem {
 		return talons[id];
 	}
 	
+	public CANTalon[] getTalons() {
+		return talons;
+	}
+	
 	public CANTalon getTalon(MotorType mtype) {
 		return talons[mtype.value];
 	}
