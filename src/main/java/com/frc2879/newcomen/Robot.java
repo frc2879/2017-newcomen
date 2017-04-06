@@ -14,7 +14,7 @@ public class Robot extends IterativeRobot {
 
 
     public static final String name = "2017-Newcomen";
-    public static final String version = "0.3.0";
+    public static final String version = "0.3.1";
 
     public static SettingsRegister settings = new SettingsRegister();
     
