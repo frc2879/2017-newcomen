@@ -17,10 +17,12 @@ public class Drivetrain extends Subsystem {
 	private static int TALONS_REAR_LEFT = 4;
 	private static int TALONS_REAR_RIGHT = 5;
 	
-	private static int ENC_CODES_PER_REV = 108;
+	private static int ENC_CODES_PER_REV = 40;
 	
 	private CANTalon[] talons;
 	private RobotDrive robotDrive;
+	
+	private ConstantMecanumDrive constantMecanumDrive;
 	 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -30,8 +32,13 @@ public class Drivetrain extends Subsystem {
         super("Drivetrain");
         //SmartDashboard.putData(this);
         System.out.println("drivetrain init");
+        constantMecanumDrive = new ConstantMecanumDrive();
         initTalonConfig();
 
+    }
+    
+    public ConstantMecanumDrive getConstantMecanumDrive() {
+    	return constantMecanumDrive;
     }
     
 
@@ -50,7 +57,13 @@ public class Drivetrain extends Subsystem {
             t.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
             t.enableBrakeMode(false);
             t.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-            t.configEncoderCodesPerRev(ENC_CODES_PER_REV);
+            //t.configEncoderCodesPerRev(ENC_CODES_PER_REV);
+            
+            // front right at 100%
+            //Pos (rot): 899.755 	Velocity (RPM):2366.25
+            // Pos:143961 	Velocity:631
+            
+            
             t.setEncPosition(0);
             t.set(0);
         }
@@ -151,8 +164,71 @@ public class Drivetrain extends Subsystem {
 	    talons[MotorType.kRearRight.value].set(values[MotorType.kRearRight.value]);
 	}
 	
+	
 	public void customMecanumDrive_Cartesian(double x, double y, double rotation) {
 		setTalons(mecanumSpeeds_Cartesian(x, -y, rotation)); // -y to account for reversed y from joystick
+	}
+	
+	public class ConstantMecanumDrive {
+		private double x;
+		private double y;
+		private double rotation;
+		/**
+		 * @return the x
+		 */
+		public double getX() {
+			return x;
+		}
+		/**
+		 * @param x the x to set
+		 */
+		public void setX(double x) {
+			this.x = x;
+			setDrive();
+		}
+		/**
+		 * @return the y
+		 */
+		public double getY() {
+			return y;
+		}
+		/**
+		 * @param y the y to set
+		 */
+		public void setY(double y) {
+			this.y = y;
+			setDrive();
+		}
+		/**
+		 * @return the rotation
+		 */
+		public double getRotation() {
+			return rotation;
+		}
+		/**
+		 * @param rotation the rotation to set
+		 */
+		public void setRotation(double rotation) {
+			this.rotation = rotation;
+			setDrive();
+		}
+		
+		public void setAll(double x, double y, double rotation) {
+			this.x = x;
+			this.y = y;
+			this.rotation = rotation;
+			
+			setDrive();
+		}
+		
+		public void setDrive() {
+			setTalons(mecanumSpeeds_Cartesian(x, y, rotation));
+		}
+		
+		public void stop() {
+			setAll(0, 0, 0);
+		}
+		
 	}
 	
 }
