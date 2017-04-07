@@ -24,7 +24,7 @@ public class MoveLiftStick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("move stick " + reverseDirection + " " + Robot.oi.correctThrottle());
+    	//System.out.println("move stick " + reverseDirection + " " + Robot.oi.correctThrottle());
     	Robot.lift.set(reverseDirection ? -Robot.oi.correctThrottle() : Robot.oi.correctThrottle());
     }
 

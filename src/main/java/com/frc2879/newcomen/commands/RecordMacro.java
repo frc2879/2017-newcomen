@@ -20,7 +20,7 @@ public class RecordMacro extends Command {
 
 	public RecordMacro(String macroName) {
 		// TODO Auto-generated constructor stub
-		super("RecordMacro");
+		super("RecordMacro " + macroName);
 		this.macroName = macroName;
 	}
 

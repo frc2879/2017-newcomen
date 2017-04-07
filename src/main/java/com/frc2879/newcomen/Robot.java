@@ -2,12 +2,14 @@ package com.frc2879.newcomen;
 
 import java.util.HashMap;
 
+import com.frc2879.newcomen.commands.DriveForward;
 import com.frc2879.newcomen.commands.PlayMacro;
 import com.frc2879.newcomen.commands.RecordMacro;
 import com.frc2879.newcomen.controls.OI;
 import com.frc2879.newcomen.subsystems.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,7 +21,7 @@ public class Robot extends IterativeRobot {
 
 
     public static final String name = "2017-Newcomen";
-    public static final String version = "0.3.1";
+    public static final String version = "0.3.3";
 
     public static SettingsRegister settings = new SettingsRegister();
     
@@ -30,6 +32,8 @@ public class Robot extends IterativeRobot {
     public static OI oi;
         
     Command autonomousCommand;
+    
+    DriveForward driveForward;
 
     SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -46,13 +50,41 @@ public class Robot extends IterativeRobot {
     	imu = new IMU();
     	
         oi = new OI();
+        
+        Preferences pref = Preferences.getInstance();
+
+		if(!pref.containsKey("Drive Forward Speed"))
+			pref.putDouble("Drive Forward Speed", 0.5);
+		if(!pref.containsKey("Drive Forward Duration"))
+			pref.putDouble("Drive Forward Duration", 5);
+        
+        
         System.out.println("Loaded " + name + " v" + version);
-        chooser.addDefault("Auto 3", new PlayMacro("AutoRecord3"));
+        chooser.addObject("Auto 1", new PlayMacro("AutoRecord1"));
+        chooser.addObject("Auto 2", new PlayMacro("AutoRecord2"));
+        chooser.addObject("Auto 3", new PlayMacro("AutoRecord3"));
         chooser.addObject("Auto 4", new PlayMacro("AutoRecord4"));
         chooser.addObject("Auto 5", new PlayMacro("AutoRecord5"));
         chooser.addObject("Auto 6", new PlayMacro("AutoRecord6"));
+        chooser.addObject("Auto 7", new PlayMacro("AutoRecord7"));
+        chooser.addObject("Auto 8", new PlayMacro("AutoRecord8"));
+        chooser.addObject("Auto 9", new PlayMacro("AutoRecord9"));
         chooser.addObject("No Auto", new InstantCommand());
+        chooser.addDefault("Drive Forward", driveForward);
         SmartDashboard.putData("Auto mode", chooser);
+        
+        
+        SmartDashboard.putData(new RecordMacro("AutoRecord1"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord2"));
+        
+        SmartDashboard.putData(new RecordMacro("AutoRecord3"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord4"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord5"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord6"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord7"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord8"));
+        SmartDashboard.putData(new RecordMacro("AutoRecord9"));
+        
     }
 
 
@@ -85,6 +117,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
     	System.out.println("auto init");
+    	if(chooser.getSelected() == driveForward) {
+    		Preferences pref = Preferences.getInstance();
+    		DriveForward driveForward2 = new DriveForward(pref.getDouble("Drive Forward Speed", 0), pref.getDouble("Drive Forward Duration", 0));
+    		System.out.println("Running " + driveForward2.getName());
+    		driveForward2.start();
+    		return;
+    	}
         autonomousCommand = chooser.getSelected();
 
         /*
